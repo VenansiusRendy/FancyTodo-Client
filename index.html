@@ -38,20 +38,20 @@
 						class="navbar-nav mb-2 mb-lg-0"
 						style="margin-left: auto; margin-right: 0"
 					>
-						<li class="nav-item">
+						<li class="nav-item" id="list-nav">
 							<a class="nav-link active" aria-current="page" href="#">List</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item" id="sign-in-nav">
 							<a class="nav-link" href="#"
 								><i class="fas fa-sign-in-alt"></i> Sign In</a
 							>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item" id="sign-out-nav">
 							<a class="nav-link" href="#"
 								><i class="fas fa-sign-out-alt"></i> Sign Out</a
 							>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item" id="sign-up-nav">
 							<a class="nav-link" href="#"
 								><i class="fas fa-user-plus"></i> Sign Up</a
 							>
@@ -60,11 +60,12 @@
 				</div>
 			</div>
 		</nav>
-    <!-- Todo Container -->
-		<section id="todo-container" class="m-4" style="width: 30vw">
-			<div class="card" style="width: 100%">
+		<!-- Todo Container -->
+		<section id="todo-container" class="d-flex justify-content-around mt-4">
+			<!-- Todo List -->
+			<div class="card col-sm-5" style="height: 80vh" id="todo-list-container">
 				<div class="card-header" style="font-size: larger">TODO LIST</div>
-				<ol class="list-group list-group-numbered" id="todo-list-container">
+				<ol class="list-group list-group-numbered">
 					<li
 						class="list-group-item d-flex justify-content-between align-items-start"
 					>
@@ -75,46 +76,239 @@
 							</div>
 							Todo App Part 4
 						</div>
-						<a class="nav-link" href="#"><i class="fas fa-times fa-2x"></i></i></a>
+						<a class="nav-link" href="#"><i class="fas fa-times fa-2x"></i></a>
 					</li>
 				</ol>
 			</div>
+			<!-- Todo Edit -->
+			<div
+				class="card col-sm-5"
+				style="height: fit-content"
+				id="todo-edit-container"
+			>
+				<div class="card-header" style="font-size: larger">EDIT</div>
+				<form action="#" class="login-form py-4">
+					<div class="form-group m-2">
+						<input
+							type="text"
+							class="form-control rounded-left"
+							placeholder="Title"
+							required
+							id="titleFieldTodoEditForm"
+						/>
+					</div>
+					<div class="form-group m-2">
+						<input
+							type="text"
+							class="form-control rounded-left"
+							placeholder="Description"
+							required
+							id="descriptionFieldTodoEditForm"
+						/>
+					</div>
+					<div class="form-group m-2">
+						<input
+							type="text"
+							class="form-control rounded-left"
+							placeholder="Status"
+							required
+							id="statusFieldTodoEditForm"
+						/>
+					</div>
+					<div class="form-group m-2">
+						<input
+							type="date"
+							class="form-control rounded-left"
+							placeholder="Due Date"
+							required
+							id="dueDateFieldTodoEditForm"
+						/>
+					</div>
+					<div
+						class="form-group justify-content-center align-content-center d-flex"
+					>
+						<button
+							id="editButton"
+							type="submit"
+							class="btn btn-warning submit"
+						>
+							Edit
+						</button>
+					</div>
+				</form>
+			</div>
+			<!-- Todo Add -->
+			<div
+				class="card col-sm-5"
+				style="height: fit-content"
+				id="todo-add-container"
+			>
+				<div class="card-header" style="font-size: larger">ADD</div>
+				<form action="#" class="login-form py-4">
+					<div class="form-group m-2">
+						<input
+							type="text"
+							class="form-control rounded-left"
+							placeholder="Title"
+							required
+							id="titleFieldTodoAddForm"
+						/>
+					</div>
+					<div class="form-group m-2">
+						<input
+							type="text"
+							class="form-control rounded-left"
+							placeholder="Description"
+							required
+							id="descriptionFieldTodoAddForm"
+						/>
+					</div>
+					<div class="form-group m-2">
+						<input
+							type="text"
+							class="form-control rounded-left"
+							placeholder="Status"
+							required
+							id="statusFieldTodoAddForm"
+						/>
+					</div>
+					<div class="form-group m-2">
+						<input
+							type="date"
+							class="form-control rounded-left"
+							placeholder="Due Date"
+							required
+							id="dueDateFieldTodoAddForm"
+						/>
+					</div>
+					<div
+						class="form-group justify-content-center align-content-center d-flex"
+					>
+						<button id="addButton" type="submit" class="btn btn-success submit">
+							ADD
+						</button>
+					</div>
+				</form>
+			</div>
 		</section>
-    <section id="sign-in">
-      <form class="row gx-3 gy-2 align-items-center">
-        <div class="col-sm-3">
-          <label class="visually-hidden" for="specificSizeInputName">Name</label>
-          <input type="text" class="form-control" id="specificSizeInputName" placeholder="Jane Doe">
-        </div>
-        <div class="col-sm-3">
-          <label class="visually-hidden" for="specificSizeInputGroupUsername">Username</label>
-          <div class="input-group">
-            <div class="input-group-text">@</div>
-            <input type="text" class="form-control" id="specificSizeInputGroupUsername" placeholder="Username">
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <label class="visually-hidden" for="specificSizeSelect">Preference</label>
-          <select class="form-select" id="specificSizeSelect">
-            <option selected>Choose...</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="autoSizingCheck2">
-            <label class="form-check-label" for="autoSizingCheck2">
-              Remember me
-            </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </form>
-    </section>
+		<!-- Sign In -->
+		<section id="sign-in-container" class="col-sm-12" style="margin: 0, auto">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-6 text-center mb-5"></div>
+				</div>
+				<div class="row justify-content-center">
+					<div
+						class="col-md-6 col-lg-5"
+						style="border: 1px solid #aaa; border-radius: 15px"
+					>
+						<div class="login-wrap p-4 p-md-5">
+							<div
+								class="icon d-flex align-items-center justify-content-center"
+							>
+								<span class=""><i class="fas fa-user fa-6x"></i></span>
+							</div>
+							<h3 class="text-center m-4">Welcome</h3>
+							<form action="#" class="login-form">
+								<div class="form-group m-2">
+									<input
+										type="email"
+										class="form-control rounded-left"
+										placeholder="Email"
+										required
+										id="emailFieldSignInForm"
+									/>
+								</div>
+								<div class="form-group m-2">
+									<input
+										type="password"
+										class="form-control rounded-left"
+										placeholder="Password"
+										required
+										id="passwordFieldSignInForm"
+									/>
+								</div>
+								<div
+									class="form-group m-2 justify-content-center align-content-center d-flex"
+								>
+									<div class="">
+										<label class="checkbox-wrap checkbox-primary"
+											>Remember Me
+											<input type="checkbox" checked />
+											<span class="checkmark"></span>
+										</label>
+									</div>
+								</div>
+								<div
+									class="form-group justify-content-center align-content-center d-flex"
+								>
+									<button
+										id="signInBtn"
+										type="submit"
+										class="btn btn-primary submit mx-2"
+									>
+										Sign In
+									</button>
+									<button type="submit" class="btn btn-success submit mx-2">
+										Sign Up
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Sign Up -->
+		<section id="sign-up-container" class="col-sm-12" style="margin: 0, auto">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-6 text-center mb-5"></div>
+				</div>
+				<div class="row justify-content-center">
+					<div
+						class="col-md-6 col-lg-5"
+						style="border: 1px solid #aaa; border-radius: 15px"
+					>
+						<div class="login-wrap p-4 p-md-5">
+							<div
+								class="icon d-flex align-items-center justify-content-center"
+							>
+								<span class=""><i class="fas fa-user fa-6x"></i></span>
+							</div>
+							<h3 class="text-center m-4">Register</h3>
+							<form action="#" class="login-form">
+								<div class="form-group m-2">
+									<input
+										type="email"
+										class="form-control rounded-left"
+										placeholder="Email"
+										required
+										id="emailFieldSignUpForm"
+									/>
+								</div>
+								<div class="form-group m-2">
+									<input
+										type="password"
+										class="form-control rounded-left"
+										placeholder="Password"
+										required
+										id="passwordFieldSignUpForm"
+									/>
+								</div>
+								<div
+									class="form-group justify-content-center align-content-center d-flex"
+								>
+									<button type="submit" class="btn btn-primary submit">
+										Sign Up
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 		<script
 			src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
 			integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
