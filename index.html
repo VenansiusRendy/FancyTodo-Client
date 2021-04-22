@@ -61,12 +61,21 @@
 			</div>
 		</nav>
 		<!-- Todo Container -->
+		<div id="alert"></div>
 		<section id="todo-container" class="d-flex justify-content-around mt-4">
 			<!-- Todo List -->
-			<div class="card col-sm-5" style="height: 80vh" id="todo-list-container">
-				<div class="card-header" style="font-size: larger">TODO LIST</div>
-				<ol class="list-group list-group-numbered">
-					<li
+			<div class="card col-sm-5" style="height: auto" id="todo-list-container">
+				<div
+					class="card-header d-flex justify-content-between align-content-center"
+					style="font-size: larger"
+				>
+					<h2>TODO LIST</h2>
+					<a id="todoAddBtn" class="nav-link" href="#"
+						><i class="fas fa-plus-circle fa-2x"></i
+					></a>
+				</div>
+				<ol id="todo-list-ol" class="list-group list-group-numbered">
+					<!-- <li
 						class="list-group-item d-flex justify-content-between align-items-start"
 					>
 						<div class="ms-2 me-auto">
@@ -77,7 +86,7 @@
 							Todo App Part 4
 						</div>
 						<a class="nav-link" href="#"><i class="fas fa-times fa-2x"></i></a>
-					</li>
+					</li> -->
 				</ol>
 			</div>
 			<!-- Todo Edit -->
@@ -98,22 +107,15 @@
 						/>
 					</div>
 					<div class="form-group m-2">
-						<input
-							type="text"
-							class="form-control rounded-left"
-							placeholder="Description"
-							required
-							id="descriptionFieldTodoEditForm"
-						/>
-					</div>
-					<div class="form-group m-2">
-						<input
-							type="text"
-							class="form-control rounded-left"
-							placeholder="Status"
-							required
+						<select
 							id="statusFieldTodoEditForm"
-						/>
+							class="form-select"
+							aria-label="Default select example"
+							name="statusFieldTodoEditForm"
+						>
+							<option value="start" selected>Start</option>
+							<option value="done">Done</option>
+						</select>
 					</div>
 					<div class="form-group m-2">
 						<input
@@ -124,11 +126,20 @@
 							id="dueDateFieldTodoEditForm"
 						/>
 					</div>
+					<div class="form-group m-2">
+						<textarea
+							type="text"
+							class="form-control rounded-left"
+							placeholder="Description"
+							required
+							id="descriptionFieldTodoEditForm"
+						></textarea>
+					</div>
 					<div
 						class="form-group justify-content-center align-content-center d-flex"
 					>
 						<button
-							id="editButton"
+							id="editButtonEditForm"
 							type="submit"
 							class="btn btn-warning submit"
 						>
@@ -155,22 +166,22 @@
 						/>
 					</div>
 					<div class="form-group m-2">
-						<input
-							type="text"
-							class="form-control rounded-left"
-							placeholder="Description"
-							required
-							id="descriptionFieldTodoAddForm"
-						/>
-					</div>
-					<div class="form-group m-2">
-						<input
+						<select
+							id="statusFieldTodoAddForm"
+							class="form-select"
+							aria-label="Default select example"
+							name="statusFieldTodoAddForm"
+						>
+							<option value="start" selected>Start</option>
+							<option value="done">Done</option>
+						</select>
+						<!-- <input
 							type="text"
 							class="form-control rounded-left"
 							placeholder="Status"
 							required
 							id="statusFieldTodoAddForm"
-						/>
+						/> -->
 					</div>
 					<div class="form-group m-2">
 						<input
@@ -181,10 +192,23 @@
 							id="dueDateFieldTodoAddForm"
 						/>
 					</div>
+					<div class="form-group m-2">
+						<textarea
+							type="text"
+							class="form-control rounded-left"
+							placeholder="Description"
+							required
+							id="descriptionFieldTodoAddForm"
+						></textarea>
+					</div>
 					<div
 						class="form-group justify-content-center align-content-center d-flex"
 					>
-						<button id="addButton" type="submit" class="btn btn-success submit">
+						<button
+							id="addBtnAddForm"
+							type="submit"
+							class="btn btn-success submit"
+						>
 							ADD
 						</button>
 					</div>
@@ -209,7 +233,7 @@
 								<span class=""><i class="fas fa-user fa-6x"></i></span>
 							</div>
 							<h3 class="text-center m-4">Welcome</h3>
-							<form action="#" class="login-form">
+							<form id="sign-in-form" action="#" class="login-form">
 								<div class="form-group m-2">
 									<input
 										type="email"
@@ -234,7 +258,13 @@
 									<div class="">
 										<label class="checkbox-wrap checkbox-primary"
 											>Remember Me
-											<input type="checkbox" checked />
+											<input
+												id="rememberMeSignInForm"
+												name="rememberMe"
+												type="checkbox"
+												checked
+												value="true"
+											/>
 											<span class="checkmark"></span>
 										</label>
 									</div>
@@ -249,7 +279,7 @@
 									>
 										Sign In
 									</button>
-									<button type="submit" class="btn btn-success submit mx-2">
+									<button id="signUpBtnRef" class="btn btn-success submit mx-2">
 										Sign Up
 									</button>
 								</div>
@@ -277,7 +307,7 @@
 								<span class=""><i class="fas fa-user fa-6x"></i></span>
 							</div>
 							<h3 class="text-center m-4">Register</h3>
-							<form action="#" class="login-form">
+							<form action="#" class="login-form" id="sign-up-form">
 								<div class="form-group m-2">
 									<input
 										type="email"
@@ -310,8 +340,8 @@
 			</div>
 		</section>
 		<script
-			src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-			integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 			crossorigin="anonymous"
 		></script>
 		<script
