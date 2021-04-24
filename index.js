@@ -135,11 +135,30 @@ const signIn = (e) => {
 };
 
 function onSignIn(googleUser) {
-	const profile = googleUser.getBasicProfile();
-	console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
-	console.log("Name: " + profile.getName());
-	console.log("Image URL: " + profile.getImageUrl());
-	console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+	const id_token = googleUser.getAuthResponse().id_token;
+	const rememberField = $("#rememberMeSignInForm");
+	$.ajax({
+		method: "POST",
+		url: "http://localhost:3000/googleLogin",
+		data: {
+			token: id_token,
+		},
+	})
+		.done((data) => {
+			const { access_token } = data;
+			if (rememberField.val() === "true")
+				localStorage.setItem("access_token", access_token);
+			else if (rememberField.val() === "false")
+				sessionStorage.setItem("access_token", access_token);
+			notif("success", "Welcome :)");
+		})
+		.fail((err) => {
+			const { errors } = err.responseJSON;
+			notif("danger", errors.join(", "));
+		})
+		.always(() => {
+			isLoggedIn();
+		});
 }
 
 function onSignOut() {
@@ -363,8 +382,8 @@ const deleteTodo = (e) => {
 			access_token: localStorage.getItem("access_token"),
 		},
 	})
-		.done((_) => {
-			notif("success", `Task Successfully Editted`);
+		.done(({ message }) => {
+			notif("success", message);
 			getTodo();
 		})
 		.fail((err) => {
