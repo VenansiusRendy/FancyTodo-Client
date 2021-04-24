@@ -10,6 +10,7 @@ $(document).ready(function () {
 	$("#todoAddBtn").on("click", addForm);
 	$("#addBtnAddForm").on("click", addTodo);
 	$("#editButtonEditForm").on("click", editTodo);
+	$("#todoCheckWeather").on("click", checkWeather);
 });
 
 const isLoggedIn = () => {
@@ -62,6 +63,7 @@ const notif = (type, message) => {
 const signOut = (e) => {
 	e.preventDefault();
 	localStorage.removeItem("access_token");
+	sessionStorage.removeItem("access_token");
 	isLoggedIn();
 	onSignOut();
 };
@@ -202,7 +204,9 @@ const addTodo = (e) => {
 		method: "POST",
 		url: "http://localhost:3000/todos",
 		headers: {
-			access_token: localStorage.getItem("access_token"),
+			access_token:
+				localStorage.getItem("access_token") ||
+				sessionStorage.getItem("access_token"),
 		},
 		data: {
 			title: titleField.val(),
@@ -231,7 +235,9 @@ const getTodo = () => {
 		method: "GET",
 		url: "http://localhost:3000/todos",
 		headers: {
-			access_token: localStorage.getItem("access_token"),
+			access_token:
+				localStorage.getItem("access_token") ||
+				sessionStorage.getItem("access_token"),
 		},
 	})
 		.done(({ data }) => {
@@ -296,7 +302,9 @@ const editTodoForm = (e) => {
 		method: "GET",
 		url: `http://localhost:3000/todos/${id}`,
 		headers: {
-			access_token: localStorage.getItem("access_token"),
+			access_token:
+				localStorage.getItem("access_token") ||
+				sessionStorage.getItem("access_token"),
 		},
 	})
 		.done(({ data }) => {
@@ -340,7 +348,9 @@ const editTodo = (e) => {
 		method: "PUT",
 		url: `http://localhost:3000/todos/${id}`,
 		headers: {
-			access_token: localStorage.getItem("access_token"),
+			access_token:
+				localStorage.getItem("access_token") ||
+				sessionStorage.getItem("access_token"),
 		},
 		data: {
 			title: titleField.val(),
@@ -379,7 +389,9 @@ const deleteTodo = (e) => {
 		method: "DELETE",
 		url: `http://localhost:3000/todos/${id}`,
 		headers: {
-			access_token: localStorage.getItem("access_token"),
+			access_token:
+				localStorage.getItem("access_token") ||
+				sessionStorage.getItem("access_token"),
 		},
 	})
 		.done(({ message }) => {
@@ -407,7 +419,9 @@ const completeTodo = (e) => {
 		method: "PATCH",
 		url: `http://localhost:3000/todos/${id}`,
 		headers: {
-			access_token: localStorage.getItem("access_token"),
+			access_token:
+				localStorage.getItem("access_token") ||
+				sessionStorage.getItem("access_token"),
 		},
 		data: {
 			status: "Done",
@@ -420,6 +434,27 @@ const completeTodo = (e) => {
 		.fail((err) => {
 			const { errors } = err.responseJSON;
 			notif("danger", errors.join(", "));
+		});
+};
+
+const checkWeather = (e) => {
+	e.preventDefault();
+	console.log(e);
+	$.ajax({
+		method: "GET",
+		url: "http://localhost:3000/weather",
+		headers: {
+			access_token:
+				localStorage.getItem("access_token") ||
+				sessionStorage.getItem("access_token"),
+		},
+	})
+		.done((data) => {
+			// console.log(data);
+			notif("success", `Todays weather in Jakarta is ${data.message}`);
 		})
-		.always(() => {});
+		.fail((err) => {
+			const { errors } = err.responseJSON;
+			notif("danger", errors.join(", "));
+		});
 };
